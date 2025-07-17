@@ -1,18 +1,32 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </nav>
-  </header>
+  </header> -->
 
-  <RouterView />
+  <v-app>
+    <v-app-bar app>
+      <template v-slot:prepend>
+        <v-img :width="125" :height="125" src="@/assets/logo.svg"></v-img>
+      </template>
+      <template v-slot:append>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </template>
+    </v-app-bar>
+
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped>
@@ -23,6 +37,25 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
+}
+
+/* App bar navigation links */
+.v-app-bar a {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.v-app-bar a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.v-app-bar a.router-link-exact-active {
+  background-color: rgba(0, 0, 0, 0.15);
+  font-weight: 500;
 }
 
 nav {
