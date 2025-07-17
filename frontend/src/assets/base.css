@@ -39,6 +39,9 @@
   --text-light-2: rgba(58, 80, 107, 0.66);
   --text-dark-1: var(--white);
   --text-dark-2: rgba(255, 255, 255, 0.64);
+
+  --color-link: var(--blue);
+  --color-link-hover: var(--blue-hover);
 }
 
 /* semantic color variables for this project */
@@ -50,7 +53,7 @@
   --color-border: var(--border-light);
   --color-border-hover: var(--blue-soft);
 
-  --color-heading: var(--text-light-1);
+  --color-heading: var(--text-light- 1);
   --color-text: var(--text-light-2);
 
   --color-primary: var(--blue);
@@ -102,4 +105,17 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
