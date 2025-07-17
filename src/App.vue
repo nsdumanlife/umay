@@ -3,20 +3,10 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </header> -->
-
   <v-app>
     <v-app-bar app>
-      <template v-slot:prepend>
-        <v-img :width="125" :height="125" src="@/assets/logo.svg"></v-img>
-      </template>
+      <v-app-bar-title>Umay</v-app-bar-title>
+
       <template v-slot:append>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
