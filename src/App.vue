@@ -4,16 +4,16 @@ import { RouterView } from 'vue-router'
 
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-app-bar-title>Umay</v-app-bar-title>
-
-      <template v-slot:append>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </template>
-    </v-app-bar>
-
     <v-main>
+      <v-app-bar app class="header">
+        <v-app-bar-title>Umay</v-app-bar-title>
+
+        <template v-slot:append>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+        </template>
+      </v-app-bar>
+
       <RouterView />
     </v-main>
   </v-app>
