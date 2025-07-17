@@ -26,7 +26,7 @@ const clearChat = () => {
         variant="outlined"
         v-model="textChatStore.text"
         label="Text"
-        rows="16"
+        rows="8"
         :error-messages="
           !textChatStore.text.trim() && textChatStore.error ? ['Text is required'] : []
         "
@@ -95,79 +95,62 @@ const clearChat = () => {
 <style scoped>
 .text-view-container {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  flex: 1;
-  max-height: calc(100vh - var(--header-height, 64px));
-  overflow: hidden;
+  padding: 0.75rem;
+  min-height: 100vh;
 }
 
 .text-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-  overflow: hidden;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.text-container h2 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
 }
 
 .question-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-  overflow: hidden;
+  gap: 0.75rem;
+}
+
+.question-container h2 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
 }
 
 .question-input-container {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.75rem;
   flex-shrink: 0;
 }
 
+.submit-btn {
+  width: 100%;
+  height: 48px;
+  font-size: 1rem;
+}
+
 .error-alert {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
   flex-shrink: 0;
 }
 
 .response-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   margin: 1rem 0;
-  flex: 1;
-  overflow-y: auto;
-  max-height: calc(100% - 120px);
-  padding-right: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(var(--v-theme-primary), 0.3) rgba(var(--v-theme-surface-variant), 0.1);
-}
-
-/* Custom scrollbar styling */
-.response-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.response-container::-webkit-scrollbar-track {
-  background: rgba(var(--v-theme-surface-variant), 0.1);
-  border-radius: 4px;
-}
-
-.response-container::-webkit-scrollbar-thumb {
-  background: rgba(var(--v-theme-primary), 0.3);
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.response-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--v-theme-primary), 0.5);
-}
-
-.response-container::-webkit-scrollbar-thumb:active {
-  background: rgba(var(--v-theme-primary), 0.7);
 }
 
 .history-card {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .loading-card {
@@ -181,15 +164,114 @@ const clearChat = () => {
 
 .clear-button-container {
   display: flex;
-  justify-content: flex-end;
-  margin-top: auto;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 1rem;
 }
 
-.text-view-row {
-  height: calc(100% - var(--header-height));
+@media (min-width: 768px) {
+  .text-view-container {
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 1rem;
+    min-height: auto;
+    max-height: calc(100vh - var(--header-height, 64px));
+    overflow: hidden;
+  }
+
+  .text-container {
+    flex: 1;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+
+  .text-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .question-container {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .question-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .question-input-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .submit-btn {
+    width: auto;
+    min-width: 100px;
+    height: auto;
+  }
+
+  .response-container {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100% - 120px);
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--v-theme-primary), 0.3) rgba(var(--v-theme-surface-variant), 0.1);
+  }
+
+  /* Custom scrollbar styling for desktop */
+  .response-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .response-container::-webkit-scrollbar-track {
+    background: rgba(var(--v-theme-surface-variant), 0.1);
+    border-radius: 4px;
+  }
+
+  .response-container::-webkit-scrollbar-thumb {
+    background: rgba(var(--v-theme-primary), 0.3);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  .response-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--v-theme-primary), 0.5);
+  }
+
+  .response-container::-webkit-scrollbar-thumb:active {
+    background: rgba(var(--v-theme-primary), 0.7);
+  }
+
+  .clear-button-container {
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-bottom: 0;
+  }
 }
 
-.submit-btn {
-  min-width: 100px;
+@media (min-width: 1200px) {
+  .text-view-container {
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+
+  .text-container h2,
+  .question-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .question-input-container {
+    gap: 1rem;
+  }
+
+  .response-container {
+    gap: 1rem;
+  }
+
+  .history-card {
+    margin-bottom: 1rem;
+  }
 }
 </style>
