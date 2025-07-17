@@ -10,7 +10,7 @@ import { RouterView } from 'vue-router'
 
         <template v-slot:append>
           <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/text">Text</RouterLink>
         </template>
       </v-app-bar>
 
