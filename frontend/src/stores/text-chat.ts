@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
+import { useTokenizeStore } from './tokenize'
 
 interface Prompt {
   role: string
@@ -22,6 +23,7 @@ interface useTextChatStore {
 }
 
 export const useTextChatStore = defineStore('textChat', (): useTextChatStore => {
+  const tokenizeStore = useTokenizeStore()
   const text = ref('')
   const question = ref('')
   const prompt = ref<Prompt[]>([])
@@ -40,6 +42,8 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
     const chatQuestion = { role: 'user', content: question.value }
 
     prompt.value = [instructions, textToAnalyze, chatQuestion]
+
+    tokenizeStore.tokenize(instructions.content + textToAnalyze.content + chatQuestion.content)
   }
 
   const sendPrompt = async () => {

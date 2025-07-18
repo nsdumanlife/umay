@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useTextChatStore } from '@/stores/text-chat'
+import { useTokenizeStore } from '@/stores/tokenize'
 
 const textChatStore = useTextChatStore()
+const tokenizeStore = useTokenizeStore()
 
 const sendQuestion = () => {
   textChatStore.clearError()
@@ -32,6 +34,9 @@ const clearChat = () => {
         "
         @input="textChatStore.clearError"
       />
+      <div class="token-count">
+        <p>Tokens: {{ tokenizeStore.tokens }}</p>
+      </div>
     </div>
     <div class="question-container">
       <h2>Enter your question</h2>
