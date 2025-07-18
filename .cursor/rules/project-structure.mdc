@@ -1,0 +1,36 @@
+# Project Structure Guide
+
+This is a full-stack TypeScript application with separate frontend and backend directories.
+
+## Architecture Overview
+
+- **Backend**: Express.js server with TypeScript located in [backend/](mdc:backend/)
+
+  - Entry point: [backend/bin/www](mdc:backend/bin/www)
+  - Main app: [backend/src/app.ts](mdc:backend/src/app.ts)
+  - Routes: [backend/src/routes/](mdc:backend/src/routes/)
+  - Configuration: [backend/src/config/](mdc:backend/src/config/)
+
+- **Frontend**: Vue.js 3 application with TypeScript located in [frontend/](mdc:frontend/)
+  - Entry point: [frontend/src/main.ts](mdc:frontend/src/main.ts)
+  - Main component: [frontend/src/App.vue](mdc:frontend/src/App.vue)
+  - Components: [frontend/src/components/](mdc:frontend/src/components/)
+  - Views: [frontend/src/views/](mdc:frontend/src/views/)
+  - Stores (Pinia): [frontend/src/stores/](mdc:frontend/src/stores/)
+  - Router: [frontend/src/router/](mdc:frontend/src/router/)
+
+## Key Dependencies
+
+- **Backend**: Express.js, TypeScript, OpenAI integration
+- **Frontend**: Vue.js 3, Vuetify, Pinia, Vue Router, Vite
+
+## Development Workflow
+
+- Backend runs on Express server (check [backend/package.json](mdc:backend/package.json) for scripts)
+- Frontend uses Vite for development (check [frontend/package.json](mdc:frontend/package.json) for scripts)
+- Both use TypeScript with proper configuration files
+  description:
+  globs:
+  alwaysApply: false
+
+---

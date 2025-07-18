@@ -1,0 +1,58 @@
+# General Coding Standards
+
+## Core Principles
+
+- **Use early returns** for readability and to avoid deep nesting
+- **Use functional, declarative code** patterns - avoid classes unless absolutely necessary
+- **Use descriptive names** with auxiliary verbs (e.g., `isLoading`, `hasError`, `canSubmit`)
+- **Think critically** - don't agree immediately, consider alternatives and edge cases
+- **Always output answers in English**
+
+## Error Handling
+
+- Include proper try-catch blocks for all async operations
+- Provide meaningful error messages and fallback UI
+- Use proper error types and handling patterns
+
+## Performance Considerations
+
+- Minimize `useEffect` and `useState` when possible
+- Favor server components over client components
+- Use React.memo and analyze bundle size when applicable
+- Optimize images and implement lazy loading
+
+## Code Organization
+
+- Keep functions small and focused on single responsibilities
+- Use consistent naming conventions across the codebase
+- Write self-documenting code with clear variable and function names
+- Separate concerns appropriately
+
+## Examples
+
+```typescript
+// Good: Early return pattern
+function processUserData(user: User): ProcessResult {
+  if (!user) {
+    return { success: false, error: 'User is required' }
+  }
+
+  if (!user.email) {
+    return { success: false, error: 'Email is required' }
+  }
+
+  // Process user data
+  return { success: true, data: processedUser }
+}
+
+// Good: Descriptive naming
+const isUserAuthenticated = checkAuthStatus()
+const hasValidEmail = validateEmailFormat(user.email)
+const canSubmitForm = isUserAuthenticated && hasValidEmail
+```
+
+description:
+globs:
+alwaysApply: false
+
+---

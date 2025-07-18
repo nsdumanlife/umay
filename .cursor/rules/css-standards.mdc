@@ -1,0 +1,98 @@
+---
+globs: '**/*.css,**/*.vue'
+description: 'CSS standards and mobile-first design principles'
+---
+
+# CSS Standards
+
+## Mobile-First Approach
+
+- **Start with mobile styles** as the base
+- Use `min-width` media queries to add desktop enhancements
+- Design for touch interfaces first
+- Ensure minimum 44px touch targets
+- Use only components from vuetify 3, do not use utility classes
+
+## CSS Organization
+
+- Use CSS custom properties (variables) defined in [frontend/src/assets/variables.css](mdc:frontend/src/assets/variables.css)
+- Organize styles in separate CSS files rather than inline styles
+- Use semantic, descriptive class names
+- Follow BEM naming convention when appropriate
+
+## Avoid Tailwind CSS
+
+- **Do NOT use Tailwind CSS classes**
+- Write custom CSS that's maintainable and semantic
+- Use CSS Grid and Flexbox for layouts
+- Leverage CSS custom properties for theming
+
+## Example Mobile-First CSS
+
+```css
+/* Mobile-first base styles */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--color-background);
+}
+
+.nav-item {
+  padding: 0.75rem;
+  min-height: 44px; /* Touch target minimum */
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.nav-item:hover {
+  background-color: var(--color-background-soft);
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .navigation {
+    flex-direction: row;
+    padding: 1rem 2rem;
+  }
+
+  .nav-item {
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .nav-item:last-child {
+    border-right: none;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .navigation {
+    padding: 1.5rem 3rem;
+  }
+
+  .nav-item {
+    padding: 1rem 1.5rem;
+  }
+}
+```
+
+## CSS Custom Properties Usage
+
+- Reference variables from [frontend/src/assets/variables.css](mdc:frontend/src/assets/variables.css)
+- Use consistent color, spacing, and typography scales
+- Create component-specific variables when needed
+
+## Performance
+
+- Avoid deep nesting (max 3 levels)
+- Use efficient selectors
+- Minimize layout reflows
+- Use `transform` and `opacity` for animations
+  description:
+  globs:
+  alwaysApply: false
+
+---

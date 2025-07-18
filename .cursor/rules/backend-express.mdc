@@ -1,0 +1,69 @@
+# Backend Express.js Standards
+
+## File Organization
+
+- **Routes**: Place all route handlers in [backend/src/routes/](mdc:backend/src/routes/)
+- **Configuration**: Store config files in [backend/src/config/](mdc:backend/src/config/)
+- **Main App**: Keep core Express setup in [backend/src/app.ts](mdc:backend/src/app.ts)
+
+## Route Patterns
+
+- Use async/await for all asynchronous route handlers
+- Implement proper error handling with try-catch blocks
+- Use TypeScript interfaces for request/response types
+- Follow RESTful conventions for API endpoints
+
+## Example Route Structure
+
+```typescript
+import { Request, Response } from 'express'
+
+interface ChatRequest {
+  message: string
+  conversationId?: string
+}
+
+interface ChatResponse {
+  response: string
+  conversationId: string
+}
+
+export const chatHandler = async (
+  req: Request<{}, ChatResponse, ChatRequest>,
+  res: Response<ChatResponse>
+) => {
+  try {
+    const { message, conversationId } = req.body
+
+    if (!message) {
+      return res.status(400).json({
+        error: 'Message is required',
+      } as any)
+    }
+
+    // Process the chat message
+    const response = await processChatMessage(message, conversationId)
+
+    res.json({
+      response: response.text,
+      conversationId: response.id,
+    })
+  } catch (error) {
+    console.error('Chat handler error:', error)
+    res.status(500).json({
+      error: 'Internal server error',
+    } as any)
+  }
+}
+```
+
+## Configuration Management
+
+- Use environment variables for sensitive data
+- Keep configuration objects in [backend/src/config/](mdc:backend/src/config/)
+- Export typed configuration objects
+  description:
+  globs:
+  alwaysApply: false
+
+---

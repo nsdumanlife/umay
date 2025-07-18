@@ -1,0 +1,51 @@
+# TypeScript Coding Standards
+
+## Code Style
+
+- **Use early returns** for better readability and to avoid deep nesting
+- **Use functional, declarative TypeScript code**. Avoid classes unless absolutely necessary
+- **Define clear types and interfaces** for all data structures
+- **Use descriptive names** with auxiliary verbs (e.g., `isLoading`, `hasError`, `canSubmit`)
+
+## Type Definitions
+
+- Always define explicit types for function parameters and return values
+- Use interfaces for object shapes and data contracts
+- Prefer `type` for unions, primitives, and computed types
+- Use generic types when appropriate for reusability
+
+## Error Handling
+
+- Always include try-catch blocks for async operations
+- Provide meaningful error messages and fallback UI
+- Use proper TypeScript error types
+
+## Examples
+
+```typescript
+// Good: Early return with descriptive naming
+function validateUser(user: User): ValidationResult {
+  if (!user.email) {
+    return { isValid: false, error: 'Email is required' }
+  }
+
+  if (!user.name) {
+    return { isValid: false, error: 'Name is required' }
+  }
+
+  return { isValid: true }
+}
+
+// Good: Clear interface definition
+interface ApiResponse<T> {
+  data: T
+  isLoading: boolean
+  error?: string
+}
+```
+
+description:
+globs:
+alwaysApply: false
+
+---
