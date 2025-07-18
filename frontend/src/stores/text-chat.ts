@@ -21,6 +21,7 @@ interface useTextChatStore {
   clearChat: () => void
   clearError: () => void
   clearHistory: () => void
+  findExistingAnswer: (questionToCheck: string) => string | null
 }
 
 export const useTextChatStore = defineStore('textChat', (): useTextChatStore => {
@@ -52,6 +53,19 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
 
     if (!text.value.trim() || !question.value.trim()) {
       error.value = 'Please enter both text and a question'
+      return
+    }
+
+    // Check if this question already exists in history
+    const existingAnswer = findExistingAnswer(question.value)
+    if (existingAnswer) {
+      // Move existing answer to the end of history (most recent)
+      const questionToMove = question.value.trim()
+      history.value = history.value.filter(
+        (item) => item.question.trim().toLowerCase() !== questionToMove.toLowerCase(),
+      )
+      history.value.push({ question: questionToMove, response: existingAnswer })
+      question.value = ''
       return
     }
 
@@ -96,6 +110,14 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
     history.value = []
   }
 
+  const findExistingAnswer = (questionToCheck: string): string | null => {
+    const normalizedQuestion = questionToCheck.trim().toLowerCase()
+    const existing = history.value.find(
+      (item) => item.question.trim().toLowerCase() === normalizedQuestion,
+    )
+    return existing ? existing.response : null
+  }
+
   return {
     text,
     question,
@@ -109,5 +131,6 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
     clearChat,
     clearError,
     clearHistory,
+    findExistingAnswer,
   }
 })

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useTextChatStore } from '@/stores/text-chat'
 import { useTokenizeStore } from '@/stores/tokenize'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const textChatStore = useTextChatStore()
 const tokenizeStore = useTokenizeStore()
+const showHistoryNotice = ref(false)
 
 const sendQuestion = () => {
   textChatStore.clearError()
@@ -12,7 +13,19 @@ const sendQuestion = () => {
   textChatStore.text = textChatStore.text.trim()
   textChatStore.question = textChatStore.question.trim()
 
+  // Check if answer exists in history before sending
+  const existingAnswer = textChatStore.findExistingAnswer(textChatStore.question)
+
   textChatStore.createPrompt()
+
+  if (existingAnswer) {
+    // Show history notice briefly
+    showHistoryNotice.value = true
+    setTimeout(() => {
+      showHistoryNotice.value = false
+    }, 3000)
+  }
+
   textChatStore.sendPrompt()
 }
 
@@ -84,6 +97,17 @@ watch(
         {{ textChatStore.error }}
       </v-alert>
 
+      <!-- History Notice -->
+      <v-alert
+        v-if="showHistoryNotice"
+        type="info"
+        variant="tonal"
+        class="history-notice"
+        icon="mdi-history"
+      >
+        Answer retrieved from history
+      </v-alert>
+
       <div
         class="response-container"
         v-show="textChatStore.history.length > 0 || textChatStore.isLoading"
@@ -150,6 +174,31 @@ watch(
 .error-alert {
   margin: 0.75rem 0;
   flex-shrink: 0;
+}
+
+.history-notice {
+  margin: 0.75rem 0;
+  flex-shrink: 0;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 .response-container {
