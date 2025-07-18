@@ -20,6 +20,7 @@ interface useTextChatStore {
   createPrompt: () => void
   clearChat: () => void
   clearError: () => void
+  clearHistory: () => void
 }
 
 export const useTextChatStore = defineStore('textChat', (): useTextChatStore => {
@@ -91,6 +92,10 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
     error.value = ''
   }
 
+  const clearHistory = () => {
+    history.value = []
+  }
+
   return {
     text,
     question,
@@ -103,5 +108,6 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
     createPrompt,
     clearChat,
     clearError,
+    clearHistory,
   }
 })

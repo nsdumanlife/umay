@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTextChatStore } from '@/stores/text-chat'
 import { useTokenizeStore } from '@/stores/tokenize'
+import { watch } from 'vue'
 
 const textChatStore = useTextChatStore()
 const tokenizeStore = useTokenizeStore()
@@ -18,6 +19,16 @@ const sendQuestion = () => {
 const clearChat = () => {
   textChatStore.clearChat()
 }
+
+watch(
+  () => textChatStore.text,
+  (newText, oldText) => {
+    // Clear history when text changes, but not on initial load
+    if (oldText !== undefined && newText !== oldText) {
+      textChatStore.clearHistory()
+    }
+  },
+)
 </script>
 
 <template>
