@@ -43,7 +43,7 @@ export const useTextChatStore = defineStore('textChat', (): useTextChatStore => 
 
     prompt.value = [instructions, textToAnalyze, chatQuestion]
 
-    tokenizeStore.tokenize(instructions.content + textToAnalyze.content + chatQuestion.content)
+    tokenizeStore.tokenize(prompt.value)
   }
 
   const sendPrompt = async () => {

@@ -1,26 +1,22 @@
 import express from 'express'
-import { encode } from 'gpt-tokenizer'
+import { encodeChat } from 'gpt-tokenizer'
 
 const router = express.Router()
 
-// POST endpoint to encode strings
 router.post('/', async function (req, res, next) {
   try {
-    const { stringToTokenize } = req.body
+    const { chat } = req.body
 
-    if (!stringToTokenize) {
+    if (!chat) {
       return res.status(400).send({
         error: 'Text is required',
         message: 'Please provide a text field in the request body',
       })
     }
 
-    const tokens = encode(stringToTokenize)
-
-    console.log(tokens, tokens.length)
+    const tokens = encodeChat(chat, 'gpt-4o-mini')
 
     res.status(200).send({
-      tokens: Array.from(tokens),
       tokenCount: tokens.length,
     })
   } catch (error) {

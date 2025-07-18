@@ -5,10 +5,10 @@ import { ref } from 'vue'
 export const useTokenizeStore = defineStore('tokenize', () => {
   const tokens = ref(0)
 
-  async function tokenize(stringToTokenize: string) {
+  async function tokenize(chat: { role: string; content: string }[]) {
     try {
       const response = await axios.post('http://localhost:3000/api/tokenize', {
-        stringToTokenize,
+        chat,
       })
       tokens.value = response.data.tokenCount
     } catch (error) {
