@@ -131,12 +131,6 @@ const clearChat = () => {
   flex-shrink: 0;
 }
 
-.submit-btn {
-  width: 100%;
-  height: 48px;
-  font-size: 1rem;
-}
-
 .error-alert {
   margin: 0.75rem 0;
   flex-shrink: 0;
@@ -147,10 +141,6 @@ const clearChat = () => {
   flex-direction: column;
   gap: 0.75rem;
   margin: 1rem 0;
-}
-
-.history-card {
-  margin-bottom: 0.75rem;
 }
 
 .loading-card {
@@ -186,29 +176,15 @@ const clearChat = () => {
     overflow: hidden;
   }
 
-  .text-container h2 {
-    font-size: 1.25rem;
-  }
-
   .question-container {
     flex: 1;
     overflow: hidden;
-  }
-
-  .question-container h2 {
-    font-size: 1.25rem;
   }
 
   .question-input-container {
     flex-direction: row;
     align-items: center;
     gap: 0.75rem;
-  }
-
-  .submit-btn {
-    width: auto;
-    min-width: 100px;
-    height: auto;
   }
 
   .response-container {
@@ -257,21 +233,12 @@ const clearChat = () => {
     padding: 1.5rem;
   }
 
-  .text-container h2,
-  .question-container h2 {
-    font-size: 1.5rem;
-  }
-
   .question-input-container {
     gap: 1rem;
   }
 
   .response-container {
     gap: 1rem;
-  }
-
-  .history-card {
-    margin-bottom: 1rem;
   }
 }
 </style>
