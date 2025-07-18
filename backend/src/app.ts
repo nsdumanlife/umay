@@ -12,6 +12,7 @@ dotenv.config()
 import indexRouter from './routes/index'
 import chatRouter from './routes/chat'
 import usersRouter from './routes/users'
+import tokenizeRouter from './routes/tokenize'
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url)
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/api/chat', chatRouter)
+app.use('/api/tokenize', tokenizeRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req: Request, res: Response, next: NextFunction) {
